@@ -16,12 +16,16 @@ df = pd.json_normalize(preguntas, sep=".")
 print("\nColumnas reales del DataFrame:")
 print(df.columns)
 
-# Mostrar preguntas con su examen
-print("\nPreguntas por examen:")
-print(df[["id", "textoPregunta", "examen.titulo"]].head())
+# Mostrar preguntas disponibles
+print("\nPreguntas disponibles:")
+if "examen.titulo" in df.columns:
+    print(df[["id", "textoPregunta", "examen.titulo"]].head())
+else:
+    print(df[["id", "textoPregunta", "tipoPregunta"]].head())
+    print("\nNota: La información del examen no está disponible en los datos")
 
-# Conteo por examen
-conteo = df["examen.titulo"].value_counts()
+# Conteo por tipo de pregunta
+conteo = df["tipoPregunta"].value_counts()
 print("\nNúmero de preguntas por examen:")
 print(conteo)
 

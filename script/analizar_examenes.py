@@ -22,15 +22,14 @@ df = pd.json_normalize(
     sep=".",
     meta=[
         "id", "titulo", "descripcion", "fechaInicio", "fechaFin",
-        ["creador", "email"],
-        ["creador", "role"],
-        ["creador", "profile", "name"]
+        "creadorId",
+        "creadorNombre"
     ]
 )
 
 # 3. Parsear fechas y calcular duración
-df["fechaInicio"] = pd.to_datetime(df["fechaInicio"])
-df["fechaFin"] = pd.to_datetime(df["fechaFin"])
+df["fechaInicio"] = pd.to_datetime(df["fechaInicio"], errors='coerce')
+df["fechaFin"] = pd.to_datetime(df["fechaFin"], errors='coerce')
 df["duracion_min"] = (df["fechaFin"] - df["fechaInicio"]).dt.total_seconds() / 60
 
 # 4. Análisis básico
@@ -38,11 +37,18 @@ print("Resumen de exámenes:")
 print(df[["titulo", "fechaInicio", "fechaFin", "duracion_min"]])
 
 # 5. Exámenes por creador
-conteo_creadores = df["creador.profile.name"].value_counts()
-print("\nExámenes por creador:")
-print(conteo_creadores)
+if df["creadorNombre"].notna().any():
+    conteo_creadores = df["creadorNombre"].value_counts()
+    print("\nExámenes por creador:")
+    print(conteo_creadores)
+else:
+    print("\nNo hay información de creadores disponible")
 
 # 6. Gráfico de duración
-df.plot(x="titulo", y="duracion_min", kind="barh", figsize=(10, 6), title="Duración de Exámenes (min)")
+plt.figure(figsize=(10, 6))
+plt.barh(df["titulo"], df["duracion_min"])
+plt.title("Duración de Exámenes (min)")
+plt.xlabel("Duración (minutos)")
+plt.ylabel("Examen")
 plt.tight_layout()
 plt.show()
