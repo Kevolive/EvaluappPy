@@ -4,7 +4,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 
 # Configuración
-API_URL = "http://localhost:8080/api/examenes"
+API_URL = "https://evaluapp.onrender.com/api/examenes"
 
 # 1. Obtener datos
 response = requests.get(API_URL)

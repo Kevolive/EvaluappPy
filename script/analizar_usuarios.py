@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import matplotlib.pyplot as plt
 
-API_URL = "http://localhost:8080/api/admin/users"
+API_URL = "https://evaluapp.onrender.com/api/admin/users"
 response = requests.get(API_URL)
 
 if response.status_code != 200:

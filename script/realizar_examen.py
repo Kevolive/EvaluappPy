@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 
 # Configuración
-API_URL = "http://localhost:8080/api"
+API_URL = "https://evaluapp.onrender.com/api"
 
 # 1. Obtener exámenes disponibles
 print("\nObteniendo exámenes disponibles...")

@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 
 #Primer paso: obtener todas las reguntas para dar las opciones
 
-PREGUNTAS_URL = "http://localhost:8080/api/preguntas"
-OPCIONES_BASE_URL = "http://localhost:8080/api/opciones/pregunta"
+PREGUNTAS_URL = "https://evaluapp.onrender.com/api/preguntas"
+OPCIONES_BASE_URL = "https://evaluapp.onrender.com/api/opciones/pregunta"
 
 resp_preg = requests.get(PREGUNTAS_URL)
 if resp_preg.status_code != 200:
