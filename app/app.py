@@ -8,7 +8,7 @@ import json
 st.set_page_config(page_title="Evaluapp", layout="wide")
 
 # URLs de la API
-API_BASE_URL = "http://localhost:8080/api"
+API_BASE_URL = "https://evaluapp.onrender.com/api"
 
 # Funciones auxiliares
 def get_data(endpoint, params=None):
